@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BloxScripts - Free Roblox Scripts</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #0f0f0f; color: #fff; margin: 0; padding: 20px; }
+    header { text-align: center; padding: 20px; background: #1f1f1f; border-radius: 10px; }
+    h1 { color: #00ff00; }
+    .container { max-width: 1000px; margin: auto; }
+    .script-card {
+      background: #1f1f1f; padding: 15px; margin: 15px 0; border-radius: 8px; border-left: 5px solid #00ff00;
+    }
+    button {
+      background: #00ff00; color: black; padding: 8px 16px; border: none; border-radius: 5px; cursor: pointer;
+    }
+    button:hover { background: #00cc00; }
+    textarea { width: 100%; height: 120px; background: #222; color: #0f0; border: none; padding: 10px; font-family: monospace; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>BloxScripts Hub</h1>
+      <p>Free Keyless Roblox Scripts for Blox Fruits & More</p>
+    </header>
+
+    <h2>Latest Scripts</h2>
+
+    <!-- Example Script Card -->
+    <div class="script-card">
+      <h3>HoHo Hub - Auto Farm (Keyless)</h3>
+      <p><strong>Game:</strong> Blox Fruits | <strong>Updated:</strong> July 2026</p>
+      <textarea readonly>repeat task.wait() until game:IsLoaded() and game.Players.LocalPlayer
+loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()</textarea>
+      <br><br>
+      <button onclick="copyScript(this)">Copy Script</button>
+    </div>
+
+    <div class="script-card">
+      <h3>Gravity Hub - Third Sea Farm</h3>
+      <p><strong>Game:</strong> Blox Fruits | <strong>Updated:</strong> July 2026</p>
+      <textarea readonly>repeat task.wait() until game:IsLoaded() and game.Players.LocalPlayer
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-GravityHub/BluxFruit/refs/heads/main/Main.lua"))()</textarea>
+      <br><br>
+      <button onclick="copyScript(this)">Copy Script</button>
+    </div>
+
+    <!-- Add more cards like this -->
+
+    <h2>Submit Your Script</h2>
+    <textarea id="submitScript" placeholder="Paste your script here..."></textarea><br><br>
+    <button onclick="submitScript()">Submit Script</button>
+  </div>
+
+  <script>
+    function copyScript(btn) {
+      const textarea = btn.parentElement.querySelector('textarea');
+      navigator.clipboard.writeText(textarea.value);
+      btn.textContent = "Copied!";
+      setTimeout(() => btn.textContent = "Copy Script", 2000);
+    }
+
+    function submitScript() {
+      alert("Thank you! Script submitted (demo). In real website it would be saved.");
+      // You can connect this to backend later (Firebase, etc.)
+    }
+  </script>
+</body>
+</html>
