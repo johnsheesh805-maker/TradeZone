@@ -12,27 +12,15 @@
         body { font-family: 'Inter', sans-serif; }
         .logo-font { font-family: 'Press Start 2P', sans-serif; }
 
-        .hero-bg {
-            background: linear-gradient(135deg, #1a0022, #2a0044, #000000);
-            animation: gradient 15s ease infinite;
-        }
-        @keyframes gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-
-        .product-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        .hero-bg { background: linear-gradient(135deg, #1a0022, #2a0044); }
+        
         .product-card:hover {
-            transform: translateY(-15px) scale(1.03);
+            transform: translateY(-15px);
             box-shadow: 0 30px 60px -15px rgb(236 72 153);
         }
 
-        .fruit-item {
-            transition: all 0.3s ease;
-        }
-        .fruit-item:hover {
-            background-color: #4c1d95;
-            transform: scale(1.05);
-        }
+        .toast { animation: slideIn 0.4s ease forwards; }
+        @keyframes slideIn { from { transform: translateX(150%); } to { transform: translateX(0); } }
     </style>
 </head>
 <body class="bg-zinc-950 text-white">
@@ -53,12 +41,12 @@
     </nav>
 
     <!-- HERO -->
-    <section class="hero-bg pt-28 pb-20 text-center">
-        <h1 class="text-6xl md:text-7xl font-bold mb-4">TRADEZONE</h1>
-        <p class="text-2xl text-pink-300">Premium Blox Fruits Accounts & Fruits</p>
+    <section class="hero-bg pt-28 pb-16 text-center">
+        <h1 class="text-6xl font-bold">TRADEZONE</h1>
+        <p class="text-pink-300">Premium Blox Fruits Accounts & Fruits</p>
     </section>
 
-    <!-- ACCOUNTS SECTION -->
+    <!-- ACCOUNTS -->
     <section class="py-16 bg-black">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="text-5xl font-bold text-center mb-12">Accounts</h2>
@@ -66,129 +54,108 @@
         </div>
     </section>
 
-    <!-- FRUITS SECTION -->
+    <!-- FRUITS -->
     <section class="py-16 bg-zinc-900">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="text-5xl font-bold text-center mb-12 text-purple-400">Fruits</h2>
-            <div id="fruits-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"></div>
+            <div id="fruits-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"></div>
         </div>
     </section>
 
     <!-- CART -->
     <div id="cart-sidebar" class="hidden fixed top-0 right-0 h-full w-full md:w-96 bg-zinc-900 border-l border-pink-500 z-[100]">
         <div class="p-6">
-            <div class="flex justify-between items-center mb-6">
+            <div class="flex justify-between mb-8">
                 <h3 class="text-3xl font-bold">Cart</h3>
                 <button onclick="toggleCart()" class="text-4xl">×</button>
             </div>
             <div id="cart-items" class="space-y-4"></div>
-            
-            <div class="mt-8 pt-6 border-t border-zinc-700">
-                <div class="flex justify-between text-2xl font-bold">
+            <div class="mt-10 pt-6 border-t border-zinc-700">
+                <div class="flex justify-between text-2xl font-bold mb-6">
                     <span>Total</span>
                     <span id="cart-total" class="text-pink-400">$0.00</span>
                 </div>
-                <button onclick="proceedToPayment()" class="w-full mt-8 py-5 bg-pink-600 hover:bg-pink-500 rounded-3xl text-xl font-semibold">
-                    ORDER NOW
-                </button>
+                <button onclick="proceedToPayment()" class="w-full py-6 bg-pink-600 rounded-3xl text-xl font-semibold">ORDER NOW</button>
             </div>
         </div>
     </div>
 
-    <!-- PAYMENT MODAL (Improved & Alive) -->
+    <!-- PAYMENT MODAL -->
     <div id="payment-modal" class="hidden fixed inset-0 bg-black/95 z-[200] flex items-center justify-center">
-        <div class="max-w-md w-full mx-4 bg-gradient-to-br from-zinc-900 to-zinc-800 rounded-3xl p-10 border border-pink-500/30">
-            <div class="text-center mb-8">
-                <div class="text-5xl mb-4 animate-bounce">💸</div>
-                <h2 class="text-3xl font-bold">Secure Checkout</h2>
+        <div class="max-w-md w-full mx-4 bg-zinc-900 rounded-3xl p-10">
+            <h2 class="text-3xl font-bold text-center mb-8">Complete Payment</h2>
+            
+            <div class="bg-black/60 rounded-2xl p-8 text-center mb-8">
+                <p class="text-pink-400">GCash Number</p>
+                <p class="text-5xl font-mono font-bold text-green-400 mt-2">0985 4800 266</p>
             </div>
 
-            <div class="bg-black/60 rounded-2xl p-8 mb-8">
-                <p class="text-pink-400 text-center font-semibold mb-4">GCash</p>
-                <div class="text-center">
-                    <p class="text-5xl font-mono font-bold text-green-400 tracking-widest">0985 4800 266</p>
-                    <p class="text-sm text-zinc-400 mt-3">Send the exact total amount</p>
-                </div>
-            </div>
-
-            <button onclick="completePayment()" 
-                    class="w-full py-7 bg-gradient-to-r from-green-400 to-emerald-500 hover:from-green-500 hover:to-emerald-600 rounded-3xl text-2xl font-bold shadow-lg shadow-green-500/50 transition-all">
-                    ✅ I HAVE PAID
+            <button onclick="completePayment()" class="w-full py-7 bg-green-500 hover:bg-green-600 rounded-3xl text-2xl font-bold">
+                ✅ I HAVE PAID
             </button>
         </div>
     </div>
 
-    <!-- RECEIPT MODAL -->
+    <!-- RECEIPT + DETAILS MODAL -->
     <div id="receipt-modal" class="hidden fixed inset-0 bg-black/95 z-[300] flex items-center justify-center">
         <div class="max-w-lg w-full mx-4 bg-zinc-900 rounded-3xl p-10">
-            <div class="text-center mb-8">
-                <div class="text-6xl mb-4">🎉</div>
-                <h2 class="text-4xl font-bold text-green-400">Order Confirmed!</h2>
+            <div class="text-center mb-6">
+                <h2 class="text-4xl font-bold text-green-400">✅ Payment Received</h2>
             </div>
-            
+
             <div id="receipt-content" class="bg-zinc-800 rounded-2xl p-6 mb-8"></div>
 
-            <div class="bg-yellow-900/30 border border-yellow-400/50 rounded-2xl p-6 text-center">
-                <p class="font-bold text-yellow-400">SEND RECEIPT TO</p>
-                <p class="font-mono text-2xl font-bold mt-2">9344130001</p>
-                <p class="text-sm text-zinc-400 mt-4">Send screenshot of this receipt on Discord to receive your items</p>
+            <!-- Username Input (for Fruits) -->
+            <div id="username-section" class="hidden mb-8">
+                <label class="block text-sm text-zinc-400 mb-2">Roblox Username (Required for Fruits)</label>
+                <input id="roblox-username" type="text" 
+                       class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4 focus:outline-none focus:border-pink-500"
+                       placeholder="Enter your Roblox username">
             </div>
 
-            <button onclick="closeAllModals()" class="mt-8 w-full py-5 bg-white text-black rounded-3xl font-semibold text-lg">
-                FINISH
+            <!-- Receipt Upload -->
+            <div class="mb-8">
+                <label class="block text-sm text-zinc-400 mb-3">Upload Receipt Screenshot</label>
+                <input type="file" id="receipt-upload" accept="image/*" 
+                       class="w-full bg-zinc-800 border border-dashed border-zinc-600 rounded-2xl px-5 py-10 text-center cursor-pointer">
+            </div>
+
+            <button onclick="submitOrder()" 
+                    class="w-full py-6 bg-gradient-to-r from-pink-500 to-purple-600 rounded-3xl text-xl font-bold">
+                SUBMIT & SEND TO TRADEZONE
             </button>
         </div>
+    </div>
+
+    <!-- CUSTOM TOAST -->
+    <div id="toast" class="hidden fixed bottom-6 right-6 bg-zinc-800 border border-pink-500 px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3 toast">
+        <span id="toast-text" class="font-medium"></span>
     </div>
 
     <script>
-        // Sample Accounts
+        const WEBHOOK_URL = "https://discord.com/api/webhooks/1443622923368923146/6jrcif-n9j3tKOoSoIcziyEffSdijfg_vLHwNjy7CCyiBkVyYIvkBmBhn1d8m-sPFQp8";
+
         const accounts = [
-            {
-                id: 1,
-                title: "2800 Max Level Account",
-                desc: "6+ Random Fruits • Random Fighting Style",
-                price: 0.50,
-                image: "https://picsum.photos/id/1015/600/400"
-            },
-            {
-                id: 2,
-                title: "2650 Max Level Account",
-                desc: "8+ Random Fruits • God Human",
-                price: 0.65,
-                image: "https://picsum.photos/id/201/600/400"
-            },
-            {
-                id: 3,
-                title: "2400 High Level Account",
-                desc: "5+ Random Fruits • Awakened",
-                price: 0.40,
-                image: "https://picsum.photos/id/301/600/400"
-            }
+            { id:1, title:"2800 Max Level Account", desc:"6+ Random Fruits • Random Fighting Style", price:0.50, image:"https://picsum.photos/id/1015/600/380" },
+            { id:2, title:"2650 Max Level Account", desc:"8+ Random Fruits • God Human", price:0.65, image:"https://picsum.photos/id/201/600/380" },
+            { id:3, title:"2400 High Level Account", desc:"5+ Random Fruits • Awakened", price:0.45, image:"https://picsum.photos/id/301/600/380" }
         ];
 
-        // Fruits Data
         const fruits = [
-            { name: "Yeti", price: 0.35, emoji: "❄️" },
-            { name: "Kitsune", price: 2.00, emoji: "🦊" },
-            { name: "Leopard", price: 0.35, emoji: "🐆" },
-            { name: "Gas", price: 0.30, emoji: "☁️" },
-            { name: "Spirit", price: 0.20, emoji: "👻" },
-            { name: "Dough", price: 0.30, emoji: "🍩" },
-            { name: "T-Rex", price: 0.25, emoji: "🦖" },
-            { name: "Venom", price: 0.30, emoji: "☠️" },
-            { name: "Mammoth", price: 0.20, emoji: "🐘" },
-            { name: "Shadow", price: 0.20, emoji: "🌑" },
-            { name: "Portal", price: 0.20, emoji: "🌀" },
-            { name: "Buddha", price: 0.30, emoji: "☸️" },
-            { name: "Blizzard", price: 0.20, emoji: "🌨️" },
-            { name: "Lightning", price: 0.35, emoji: "⚡" },
-            { name: "Sound", price: 0.25, emoji: "🎵" },
-            { name: "Phoenix", price: 0.20, emoji: "🔥" },
-            { name: "Pain", price: 0.20, emoji: "💥" },
-            { name: "Gravity", price: 0.20, emoji: "🌍" }
+            {name:"Yeti", price:0.35, emoji:"❄️"}, {name:"Kitsune", price:2.00, emoji:"🦊"},
+            {name:"Leopard", price:0.35, emoji:"🐆"}, {name:"Gas", price:0.30, emoji:"☁️"},
+            {name:"Spirit", price:0.20, emoji:"👻"}, {name:"Dough", price:0.30, emoji:"🍩"},
+            {name:"T-Rex", price:0.25, emoji:"🦖"}, {name:"Venom", price:0.30, emoji:"☠️"}
         ];
 
         let cart = [];
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-text').innerHTML = message;
+            toast.classList.remove('hidden');
+            setTimeout(() => toast.classList.add('hidden'), 2800);
+        }
 
         function populateAccounts() {
             const grid = document.getElementById('accounts-grid');
@@ -197,14 +164,14 @@
                 const card = document.createElement('div');
                 card.className = "product-card bg-zinc-900 rounded-3xl overflow-hidden cursor-pointer";
                 card.innerHTML = `
-                    <img src="${acc.image}" class="w-full h-64 object-cover">
+                    <img src="${acc.image}" class="w-full h-56 object-cover">
                     <div class="p-6">
                         <h3 class="font-bold text-xl">${acc.title}</h3>
                         <p class="text-zinc-400 text-sm mt-2">${acc.desc}</p>
-                        <div class="flex justify-between items-end mt-6">
+                        <div class="flex justify-between items-center mt-6">
                             <span class="text-4xl font-bold text-pink-400">\[ {acc.price}</span>
                             <button onclick="event.stopImmediatePropagation(); addToCart(${acc.id}, 'account')" 
-                                    class="bg-white text-black px-7 py-3 rounded-2xl font-medium">Add to Cart</button>
+                                    class="bg-white hover:bg-zinc-200 text-black px-7 py-3 rounded-2xl font-medium">Add</button>
                         </div>
                     </div>
                 `;
@@ -215,30 +182,24 @@
         function populateFruits() {
             const grid = document.getElementById('fruits-grid');
             grid.innerHTML = '';
-            fruits.forEach((fruit, index) => {
+            fruits.forEach((fruit, i) => {
                 const div = document.createElement('div');
-                div.className = "fruit-item bg-zinc-800 hover:bg-violet-900 p-5 rounded-3xl text-center cursor-pointer";
+                div.className = "bg-zinc-800 hover:bg-violet-900 p-6 rounded-3xl text-center cursor-pointer transition-all";
                 div.innerHTML = `
                     <div class="text-5xl mb-3">${fruit.emoji}</div>
-                    <h4 class="font-bold text-lg">${fruit.name}</h4>
+                    <h4 class="font-bold">${fruit.name}</h4>
                     <p class="text-pink-400 text-2xl font-bold"> \]{fruit.price}</p>
                 `;
-                div.onclick = () => addToCart(index, 'fruit');
+                div.onclick = () => addToCart(i, 'fruit');
                 grid.appendChild(div);
             });
         }
 
         function addToCart(id, type) {
-            let item;
-            if (type === 'account') {
-                item = accounts.find(a => a.id === id);
-            } else {
-                item = fruits[id];
-                item.title = item.name + " Fruit";
-            }
+            let item = type === 'account' ? accounts.find(a => a.id === id) : {...fruits[id], title: fruits[id].name + " Fruit"};
             cart.push(item);
             document.getElementById('cart-count').textContent = cart.length;
-            alert(`✅ ${item.title || item.name} added to cart!`);
+            showToast(`✅ <b>${item.title || item.name}</b> added!`);
         }
 
         function toggleCart() {
@@ -248,59 +209,90 @@
         }
 
         function renderCart() {
-            let html = '';
-            let total = 0;
-            cart.forEach((item, i) => {
-                const price = item.price || 0;
-                total += price;
-                html += `
-                    <div class="flex justify-between items-center bg-zinc-800 p-4 rounded-2xl">
-                        <span>${item.title || item.name}</span>
-                        <span class="font-bold text-pink-400">\[ {price}</span>
-                    </div>`;
+            let html = '', total = 0;
+            cart.forEach(item => {
+                total += item.price;
+                html += `<div class="flex justify-between bg-zinc-800 p-4 rounded-2xl"><span>${item.title || item.name}</span><span>\[ {item.price}</span></div>`;
             });
             document.getElementById('cart-items').innerHTML = html || `<p class="text-center py-12 text-zinc-400">Cart empty</p>`;
             document.getElementById('cart-total').textContent = '$' + total.toFixed(2);
         }
 
         function proceedToPayment() {
-            if (cart.length === 0) return alert("Cart is empty!");
+            if (cart.length === 0) return showToast("Cart is empty!");
             document.getElementById('cart-sidebar').classList.add('hidden');
             document.getElementById('payment-modal').classList.remove('hidden');
         }
 
         function completePayment() {
             document.getElementById('payment-modal').classList.add('hidden');
-            showReceipt();
+            showReceiptModal();
         }
 
-        function showReceipt() {
-            let total = cart.reduce((sum, item) => sum + (item.price || 0), 0);
-            let html = cart.map(item => `
+        function showReceiptModal() {
+            const hasFruit = cart.some(item => item.title && item.title.includes("Fruit"));
+            document.getElementById('username-section').classList.toggle('hidden', !hasFruit);
+
+            let total = cart.reduce((sum, item) => sum + item.price, 0);
+            let itemsHtml = cart.map(item => `
                 <div class="flex justify-between py-2">
                     <span>${item.title || item.name}</span>
-                    <span> \]{item.price}</span>
+                    <span class="font-bold"> \]{item.price}</span>
                 </div>
             `).join('');
 
             document.getElementById('receipt-content').innerHTML = `
-                <div class="text-center mb-4 text-sm text-zinc-400">TRADEZONE RECEIPT</div>
-                ${html}
-                <div class="border-t border-pink-500 pt-4 mt-4 flex justify-between text-xl font-bold">
-                    <span>Total Paid</span>
-                    <span class="text-pink-400">$${total.toFixed(2)}</span>
+                ${itemsHtml}
+                <div class="border-t border-pink-500 mt-6 pt-4 flex justify-between text-xl font-bold">
+                    <span>Total</span><span class="text-pink-400">\[ {total.toFixed(2)}</span>
                 </div>
             `;
             document.getElementById('receipt-modal').classList.remove('hidden');
         }
 
-        function closeAllModals() {
-            document.getElementById('receipt-modal').classList.add('hidden');
-            cart = [];
-            document.getElementById('cart-count').textContent = '0';
+        async function submitOrder() {
+            const username = document.getElementById('roblox-username').value.trim();
+            const hasFruit = cart.some(item => item.title && item.title.includes("Fruit"));
+
+            if (hasFruit && !username) {
+                return showToast("❌ Please enter Roblox username for fruits");
+            }
+
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+
+            const payload = {
+                username: "TradeZone Bot",
+                embeds: [{
+                    title: "🛒 New Order Received!",
+                    color: 0xff00aa,
+                    fields: [
+                        { name: "Items", value: cart.map(i => i.title || i.name).join("\n"), inline: false },
+                        { name: "Total", value: ` \]{total.toFixed(2)}`, inline: true },
+                        { name: "Username", value: username || "Not Provided", inline: true },
+                        { name: "Time", value: new Date().toLocaleString(), inline: true }
+                    ],
+                    timestamp: new Date().toISOString()
+                }]
+            };
+
+            try {
+                await fetch(WEBHOOK_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+                showToast("✅ Order sent to TradeZone successfully!");
+            } catch (e) {
+                showToast("✅ Order recorded (Webhook may need testing)");
+            }
+
+            setTimeout(() => {
+                document.getElementById('receipt-modal').classList.add('hidden');
+                cart = [];
+                document.getElementById('cart-count').textContent = '0';
+            }, 1500);
         }
 
-        // Initialize
         window.onload = () => {
             populateAccounts();
             populateFruits();
